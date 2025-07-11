@@ -31,5 +31,10 @@ jobs:
       - name: Build y test con cobertura
         run: mvn clean verify
 
+      - name: Subir reporte de cobertura como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobertura-jacoco
+          path: target/site/jacoco
       # - name: Submit dependencies snapshot
       #   uses: advanced-security/maven-dependency-submission-action@v1
