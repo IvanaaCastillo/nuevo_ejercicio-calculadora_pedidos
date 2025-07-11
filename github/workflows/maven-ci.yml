@@ -1,11 +1,5 @@
 name: Java CI with Maven
 
-permissions:
-  contents: read
-  id-token: write
-  actions: read
-  security-events: write 
-
 on:
   push:
     branches: [ main ]
@@ -17,25 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repositorio
-        uses: actions/checkout@v4
+    - name: Checkout repositorio
+      uses: actions/checkout@v4
 
-      - name: Setup Java 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+    - name: Setup Java 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
-      - name: Cache Maven packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+    - name: Cache Maven packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
 
-      - name: Build y test con cobertura
-        run: mvn clean verify
-
+    - name: Build y test con cobertura
+      run: mvn clean verify
+      
       # - name: Submit dependencies snapshot
       #   uses: advanced-security/maven-dependency-submission-action@v1
